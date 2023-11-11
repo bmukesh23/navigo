@@ -6,7 +6,7 @@ import { NavigoContext } from '../context/navigoContext'
 const style = {
     wrapper: `h-full flex flex-col`,
     title: `text-gray-500 text-center text-xs py-2 border-b`,
-    carList: `flex flex-col flex-1 overflow-scroll`,
+    carList: `flex flex-col flex-1 overflow-auto scrollbar-hide`,
     car: `flex p-3 m-2 items-center border-2 border-white`,
     selectedCar: `border-2 border-black flex p-3 m-2 items-center`,
     carImage: `h-14`,
@@ -19,8 +19,10 @@ const style = {
 
 const RideSelector = () => {
     const [carList, setCarList] = useState([])
-    const { selectedRide, setSelectedRide, setPrice, basePrice } =
+    const { selectedRide, setSelectedRide, setPrice, basePrice, pickupCoordinates, dropoffCoordinates } =
         useContext(NavigoContext)
+
+    const [distance, setDistance] = useState(null);
 
     console.log(basePrice)
 
@@ -38,6 +40,7 @@ const RideSelector = () => {
         })()
     }, [])
 
+    
     return (
         <div className={style.wrapper}>
             <div className={style.title}>Choose a ride, or swipe up for more</div>
